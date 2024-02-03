@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CamstickController : MonoBehaviour
 {
-    public PlayerController playerController;
+    PlayerController playerController;
+    LayerMask playerLayerMask;
 
     public GameObject cam;
     public Transform raycastStart;
@@ -17,7 +18,8 @@ public class CamstickController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        playerLayerMask = LayerMask.NameToLayer("Player");
     }
 
     void UpdateRotation()
@@ -42,13 +44,13 @@ public class CamstickController : MonoBehaviour
     void UpdatePosition()
     {
         RaycastHit hit;
-        if (Physics.Raycast(raycastStart.position, raycastStart.forward, out hit, stickRange))
+        if (Physics.Raycast(raycastStart.position, raycastStart.forward, out hit, stickRange, playerLayerMask))
         {
-            cam.transform.position = hit.point - (raycastStart.forward / 10);
+            stickJoint.transform.position = hit.point - (raycastStart.forward / 10);
         }
         else
         {
-            cam.transform.position = raycastStart.position + raycastStart.forward * stickRange - (raycastStart.forward / 10);
+            stickJoint.transform.position = raycastStart.position + raycastStart.forward * stickRange - (raycastStart.forward / 10);
         }
     }
 
