@@ -44,6 +44,7 @@ public class SmokeController : MonoBehaviour
 
         foreach (Vector3 position in smokingPositions)
         {
+            // Would be better to just create meshes instead of new gameobjects
             Instantiate(smokeParticle, position, Quaternion.identity, transform);
             smokedPositions.Add(position);
             particleLimit--;
