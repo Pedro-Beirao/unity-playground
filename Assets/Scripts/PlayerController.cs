@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
         // I usually use -20 as the gravity value since -9.81 feels very floaty
         yVelocity += -20 * Time.deltaTime;
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, yVelocity, Input.GetAxis("Vertical") * movementSpeed);
+        Vector3 move = Vector3.ClampMagnitude(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")), 1);
+        move *= movementSpeed;
+        move += new Vector3(0, yVelocity, 0);
         characterController.Move(transform.rotation * move * Time.deltaTime);
     }
 
