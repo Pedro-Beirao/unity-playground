@@ -36,45 +36,7 @@ public class SmokeController : MonoBehaviour
         return (((Mathf.Pow(position.x - transform.position.x, 2) / elipseHRadius) + (Mathf.Pow(position.y - transform.position.y, 2) / elipseVRadius) + (Mathf.Pow(position.z - transform.position.z, 2) / elipseHRadius)) <= 1);
     }
 
-    Vector3[] meshVertices =
-    {
-        new Vector3 (0, 0, 0),
-        new Vector3 (1, 0, 0),
-        new Vector3 (1, 1, 0),
-        new Vector3 (0, 1, 0),
-        new Vector3 (0, 1, 1),
-        new Vector3 (1, 1, 1),
-        new Vector3 (1, 0, 1),
-        new Vector3 (0, 0, 1),
-    };
-
-    int[] meshTriangles =
-    {
-        0, 2, 1, //face front
-		0, 3, 2,
-        2, 3, 4, //face top
-		2, 4, 5,
-        1, 2, 5, //face right
-		1, 5, 6,
-        0, 7, 4, //face left
-		0, 4, 3,
-        5, 4, 7, //face back
-		5, 7, 6,
-        0, 6, 7, //face bottom
-		0, 1, 6
-    };
-
-    Mesh CreateCube()
-    {
-        Mesh mesh = new Mesh();
-        mesh.vertices = meshVertices;
-        mesh.triangles = meshTriangles;
-        mesh.Optimize();
-        mesh.RecalculateNormals();
-
-        return mesh;
-    }
-
+    bool canMerge = true;
     // Update is called once per frame
     void Update()
     {
@@ -106,5 +68,36 @@ public class SmokeController : MonoBehaviour
         }
 
         smokingPositions = newSmokingPositions;
+
+        // Merge meshes to greatly improve performance
+        if (smokingPositions.Count <= 0 && canMerge)
+        {
+            Vector3 parentPos = transform.position;
+            transform.position = Vector3.zero;
+
+            canMerge = false;
+
+
+            MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+            CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+            int i = 0;
+            while (i < meshFilters.Length)
+            {
+                combine[i].mesh = meshFilters[i].sharedMesh;
+                combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+                meshFilters[i].gameObject.SetActive(false);
+
+                i++;
+            }
+
+            Mesh mesh = new Mesh();
+            mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+            mesh.CombineMeshes(combine);
+            transform.GetComponent<MeshFilter>().sharedMesh = mesh;
+            transform.gameObject.SetActive(true);
+
+            transform.position = parentPos;
+        }
     }
 }
