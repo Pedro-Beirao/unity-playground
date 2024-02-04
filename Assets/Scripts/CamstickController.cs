@@ -14,6 +14,8 @@ public class CamstickController : MonoBehaviour
     public float mouseSens = 2;
     public float stickRange = 1;
 
+    float previousRotX;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +34,14 @@ public class CamstickController : MonoBehaviour
             float rotX = -mouseSens * Input.GetAxis("Mouse Y");
 
             cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x + rotX, cam.transform.eulerAngles.y + rotY, 0);
+
+            previousRotX = cam.transform.eulerAngles.x;
         }
         else
         {
             playerController.canRotate = true;
 
-            cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y, 0);
+            cam.transform.eulerAngles = new Vector3(previousRotX, cam.transform.eulerAngles.y, 0);
         }
     }
 
