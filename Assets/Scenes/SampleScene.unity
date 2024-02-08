@@ -1393,7 +1393,7 @@ Transform:
   m_GameObject: {fileID: 750488251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 15.31, y: 1.24, z: -3.15}
-  m_LocalScale: {x: 1, y: 4.6522064, z: 8.054999}
+  m_LocalScale: {x: 0.39, y: 4.6522064, z: 8.054999}
   m_Children: []
   m_Father: {fileID: 436065519}
   m_RootOrder: 5
@@ -1802,31 +1802,31 @@ MonoBehaviour:
   gun: {fileID: 1007399369}
   resolutionScale: 2
   seed: 0
-  octaves: 1
-  cellSize: 16
+  octaves: 6
+  cellSize: 32
   axisCellCount: 4
-  amplitude: 1
-  warp: 0
+  amplitude: 0.62
+  warp: 0.72
   add: 0
-  invertNoise: 0
+  invertNoise: 1
   updateNoise: 0
   debugNoise: 0
   debugTiledNoise: 0
   debugNoiseAxis: 0
   debugNoiseSlice: 0
   cubeParams: {x: 0, y: 0, z: 0, w: 1}
-  lightColor: {r: 1, g: 0.51632565, b: 0.023584902, a: 0}
+  lightColor: {r: 1, g: 0.88582635, b: 0.7688679, a: 0}
   smokeColor: {r: 0, g: 0, b: 0, a: 0}
-  stepCount: 64
+  stepCount: 150
   stepSize: 0.05
-  lightStepCount: 8
+  lightStepCount: 16
   lightStepSize: 0.25
-  smokeSize: 32
-  volumeDensity: 1
+  smokeSize: 4
+  volumeDensity: 4
   absorptionCoefficient: 0.5
-  scatteringCoefficient: 0.5
+  scatteringCoefficient: 2.6
   extinctionColor: {r: 1, g: 1, b: 1, a: 1}
-  shadowDensity: 1
+  shadowDensity: 2.5
   phaseFunction: 2
   scatteringAnisotropy: 0
   densityFalloff: 0.25
