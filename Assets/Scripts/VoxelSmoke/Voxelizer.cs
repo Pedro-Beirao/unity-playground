@@ -153,22 +153,19 @@ public class Voxelizer : MonoBehaviour {
         //return 1 - (1 - x) * (1 - x);
     }
 
+    public void StartSmoke(Vector3 smokeOrigin)
+    {
+        voxelizeCompute.SetVector("_SmokeOrigin", smokeOrigin);
+
+        radius = 0;
+        voxelizeCompute.SetBuffer(0, "_Voxels", smokeVoxelsBuffer);
+        voxelizeCompute.Dispatch(0, Mathf.CeilToInt(totalVoxels / 128.0f), 1, 1);
+
+        voxelizeCompute.Dispatch(2, 1, 1, 1);
+    }
+
     void Update() {
         voxelizeCompute.SetInt("_MaxFillSteps", maxFillSteps);
-        if (Input.GetMouseButtonDown(1)) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 50)) {
-                smokeOrigin = hit.point - (Camera.main.transform.forward * 0.1f);
-                voxelizeCompute.SetVector("_SmokeOrigin", smokeOrigin);
-                
-                radius = 0;
-                voxelizeCompute.SetBuffer(0, "_Voxels", smokeVoxelsBuffer);
-                voxelizeCompute.Dispatch(0, Mathf.CeilToInt(totalVoxels / 128.0f), 1, 1);
-
-                voxelizeCompute.Dispatch(2, 1, 1, 1);
-            }
-        }
 
         if (iterateFill || constantFill) {
             voxelizeCompute.SetVector("_Radius", Vector3.Lerp(Vector3.zero, maxRadius, Easing(radius)));
