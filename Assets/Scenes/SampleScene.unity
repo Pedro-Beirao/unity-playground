@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 583535923}
-  itemKeybinds: 310000003200000033000000
+  itemKeybinds: 31000000320000003300000034000000
 --- !u!1 &153444531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,7 +1506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4f5621ce392974131ae746ba039757db, type: 2}
+  - {fileID: 2100000, guid: 4916b468b6b954c65a9752054305c626, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1621,7 +1621,7 @@ MonoBehaviour:
   intersectionBias: 1
   debugMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   debugStaticVoxels: 0
-  debugSmokeVoxels: 0
+  debugSmokeVoxels: 1
   debugEdgeVoxels: 0
   maxRadius: {x: 5, y: 4, z: 5}
   growthSpeed: 2
@@ -1869,7 +1869,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3704937912cd94317bf62d36113eb478, type: 3}
   m_Name: 
