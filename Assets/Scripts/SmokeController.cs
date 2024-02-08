@@ -8,9 +8,6 @@ public class SmokeController : MonoBehaviour
     public int particleLimit = 100;
     public float elipseHRadius = 10;
     public float elipseVRadius = 7;
-    bool filledElipse = false;
-
-    Mesh mesh;
 
     public HashSet<Vector3> smokedPositions = new HashSet<Vector3>();
     public HashSet<Vector3> smokingPositions = new HashSet<Vector3>();
@@ -27,8 +24,6 @@ public class SmokeController : MonoBehaviour
         // Pre-calculating the value we'll need
         elipseHRadius = Mathf.Pow(elipseHRadius, 2);
         elipseVRadius = Mathf.Pow(elipseVRadius, 2);
-
-        mesh = GetComponent<Mesh>();
     }
 
     bool IsInsideElipse(Vector3 position)
